@@ -223,11 +223,15 @@ function handleFileData(fileData) {
     let splitted =  fileData.split("\n\n\n")
 
     function respondKeyEvent (event, this) {
-      console.log(event, this)
-      if(event.key === "ArrowUp" || event.key === "ArrowDown"){
+      if(event.key === "ArrowUp"){
          event.preventDefault()
-          console.log('this.nextSibling', this.nextSibling)
+          this.previousSibling.focus()
    
+      }
+
+      if( event.key === "ArrowDown"){
+         event.preventDefault()
+          this.nextSibling.focus()
       }
      
       
