@@ -220,7 +220,14 @@ function handleFileData(fileData) {
 
     //let splitted =  fileData.split("\r\n\r\n\r\n")
 
-    let splitted =  fileData.split("\n\n\n")
+   
+
+    if (!fileData) {
+        console.log("Внимание, невалидное содержимое ответа!")
+        return;
+    }
+
+     let splitted =  fileData.split("\n\n\n")
 
     function respondKeyEvent (event, this) {
       if(event.key === "ArrowUp"){
@@ -247,11 +254,6 @@ function handleFileData(fileData) {
         result.push(div)
     });
     document.body.append(...result);
-
-    if (!fileData) {
-        // Show error
-        return;
-    }
 
 
     // Use the file data
