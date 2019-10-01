@@ -222,8 +222,15 @@ function handleFileData(fileData) {
 
     let splitted =  fileData.split("\n\n\n")
 
-    function respondKeyEvent (event) {
-      console.log(event)
+    function respondKeyEvent (event, this) {
+      console.log(event, this)
+      if(event.key === "ArrowUp" || event.key === "ArrowDown"){
+         event.preventDefault()
+          console.log('this.nextSibling', this.nextSibling)
+   
+      }
+     
+      
     }
 
     let result = [];
@@ -232,11 +239,10 @@ function handleFileData(fileData) {
         div.innerHTML = item
         div.className = "item";
         div.tabIndex = 0;
-        div.addEventListener("keydown ",respondKeyEvent)
+        div.onkeydown = respondKeyEvent;
         result.push(div)
     });
     document.body.append(...result);
-    console.log('splitted.l', splitted.length)
 
     if (!fileData) {
         // Show error
