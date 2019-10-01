@@ -227,36 +227,29 @@ function handleFileData(fileData) {
         return;
     }
 
-     let splitted =  fileData.split("\n\n\n")
-
     function respondKeyEvent (event, this) {
-      if(event.key === "ArrowUp"){
-         event.preventDefault()
-          this.previousSibling.focus()
-   
+      const compareMap = {
+        "ArrowUp":'previousSibling',
+        "ArrowDown":'nextSibling',
       }
-
-      if( event.key === "ArrowDown"){
-         event.preventDefault()
-          this.nextSibling.focus()
-      }
-     
       
+      if(compareMap[event.key]){
+        event.preventDefault()
+        this[compareMap[event.key]].focus()
+      }
     }
 
-    let result = [];
-    splitted.forEach(function (item) {
+    const createListIem = (item)=>{
         let div = document.createElement('div');
         div.innerHTML = item
         div.className = "item";
         div.tabIndex = 0;
         div.onkeydown = respondKeyEvent;
-        result.push(div)
-    });
-    document.body.append(...result);
+        return div
+    };
 
-
-    // Use the file data
+    const list = fileData.split("\n\n\n").map(createListIem);
+    document.body.append(...list);
 }
 
 // Do the request
