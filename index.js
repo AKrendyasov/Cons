@@ -228,14 +228,22 @@ function handleFileData(fileData) {
     }
 
     function respondKeyEvent (event, this) {
-      const compareMap = {
+      console.log('event', event, "this", this)
+      const siblingsCompareMap = {
         "ArrowUp":'previousSibling',
         "ArrowDown":'nextSibling',
       }
+
+      const firstLastCompareMap = {
+        "Home":'firstChild',
+        "End":'lastChild',
+      }
       
-      if(compareMap[event.key]){
+      if(siblingsCompareMap[event.key]){
         event.preventDefault()
-        this[compareMap[event.key]].focus()
+        this[siblingsCompareMap[event.key]].focus()
+      } else if (firstLastCompareMap) {
+        this.parentNode[firstLastCompareMap[event.key]].focus()
       }
     }
 
