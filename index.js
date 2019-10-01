@@ -228,7 +228,6 @@ function handleFileData(fileData) {
     }
 
     function respondKeyEvent (event, this) {
-      console.log('event', event, "this", this)
       const siblingsCompareMap = {
         "ArrowUp":'previousSibling',
         "ArrowDown":'nextSibling',
