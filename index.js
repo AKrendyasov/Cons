@@ -222,10 +222,17 @@ function handleFileData(fileData) {
 
     let splitted =  fileData.split("\n\n\n")
 
+    function respondKeyEvent (event) {
+      console.log(event)
+    }
+
     let result = [];
     splitted.forEach(function (item) {
         let div = document.createElement('div');
-        div.innerHTML = item;
+        div.innerHTML = item
+        div.className = "item";
+        div.tabIndex = 0;
+        div.addEventListener("keydown ",respondKeyEvent)
         result.push(div)
     });
     document.body.append(...result);
